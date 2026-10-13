@@ -542,8 +542,11 @@ body {
 }
 
 .ec-foot-names {
-  font-size: clamp(16px, 4.2vw, 19px);
-  letter-spacing: 0.2em;
+  /* this repo's parent names are longer ("Dr. Richa Trivedi & Sandeep
+     Trivedi"), so this is sized down a bit from the shared default to
+     keep it from crowding/wrapping awkwardly — only here, not elsewhere */
+  font-size: clamp(13px, 3.4vw, 15px);
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--ink);
   margin: clamp(8px, 1.8vh, 12px) 0 clamp(8px, 1.8vh, 12px);
