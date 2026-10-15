@@ -419,59 +419,55 @@ body {
   position: relative;
   max-width: 320px;
   margin: 0 auto;
-  padding: 0 4px;
+  padding-left: 26px;
 }
 
-/* the dashed line the runner rides along, same idea as the save-the-date
-   card's celebrations timeline: one continuous track behind all the rows */
-.sched-track {
+/* a static vertical line connecting every stop — no scroll-linked runner */
+.sched-list::before {
+  content: '';
   position: absolute;
   top: 6px;
   bottom: 6px;
-  left: 50%;
-  width: 0;
-  border-left: 1px dashed var(--gold);
-  opacity: 0.55;
-  transform: translateX(-50%);
+  left: 4px;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--gold) 6%, var(--gold) 94%, transparent);
+  opacity: 0.45;
 }
 
-/* a small gold token that tracks scroll position along the track,
-   via src/js/script.js (same technique as the wedding card's timeline-runner) */
-.sched-runner {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 16px;
-  height: 16px;
-  transform: translate(-50%, -50%);
-  z-index: 3;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #fff9ec 0%, #e9dcc0 60%, #c9a35c 100%);
-  box-shadow: 0 3px 10px rgba(90,69,36,0.35), 0 0 0 3px #f4ede1;
-  will-change: transform, top;
-}
-
-.sched-row {
+.sched-item {
   position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: 1fr 34px 1fr;
-  align-items: center;
-  column-gap: clamp(14px, 4vw, 22px);
-  padding: 22px 0;
+  text-align: left;
+  padding: 0 0 clamp(26px, 5vh, 34px);
 }
 
-.sched-row:first-child { padding-top: 6px; }
-.sched-row:last-child { padding-bottom: 6px; }
+.sched-item:last-child { padding-bottom: 0; }
 
-.sched-side-left { text-align: right; }
-.sched-side-right { text-align: left; }
+/* every stop gets the same plain, uniform marker — nothing moves */
+.sched-dot {
+  position: absolute;
+  top: 6px;
+  left: -26px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 4px #f4ede1, 0 0 0 5px rgba(179,144,79,0.3);
+}
+
+.sched-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: clamp(17px, 4.6vw, 20px);
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
 
 .sched-time {
-  font-size: clamp(16px, 4.2vw, 19px);
-  letter-spacing: 0.04em;
+  font-size: clamp(13px, 3.4vw, 15px);
+  letter-spacing: 0.03em;
   color: var(--ink);
-  opacity: 0.9;
+  opacity: 0.75;
+  margin-top: 4px;
 }
 
 .sched-addr {
@@ -480,28 +476,7 @@ body {
   text-transform: uppercase;
   color: var(--gold);
   opacity: 0.85;
-  margin-top: 4px;
-}
-
-.sched-name {
-  font-size: clamp(16px, 4.2vw, 19px);
-  letter-spacing: 0.04em;
-  color: var(--ink);
-  opacity: 0.9;
-}
-
-/* every stop gets the same plain gold diamond — only the one runner
-   below is the highlighted marker, same as the wedding card's .tl-dot */
-.sched-dot {
-  position: relative;
-  z-index: 1;
-  justify-self: center;
-  flex-shrink: 0;
-  width: 8px;
-  height: 8px;
-  background: var(--gold);
-  transform: rotate(45deg);
-  box-shadow: 0 0 0 4px #f4ede1, 0 0 0 5px rgba(179,144,79,0.35);
+  margin-top: 5px;
 }
 
 .sched-closing {
